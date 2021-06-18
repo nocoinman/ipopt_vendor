@@ -1,0 +1,9 @@
+# Ignore everything
+**
+
+# Allow installation script
+!/install.sh
+
+# Allow samples
+!/testing
+
