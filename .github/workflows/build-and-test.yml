@@ -18,6 +18,7 @@ jobs:
 
       - name: Test Installation
         run: |
+          sudo apt-get install -y libgtest-dev
           mkdir build && cd build
           cmake -DCMAKE_BUILD_TYPE=Release $GITHUB_WORKSPACE/testing
           make -j4
