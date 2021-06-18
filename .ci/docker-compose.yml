@@ -3,7 +3,7 @@ version: "3"
 services:
   tests:
     container_name: ipopt_installation_test
-    build: .
+    build: ..
     command: cd /overlay && make test
     volumes:
       - ./testing:/overlay
