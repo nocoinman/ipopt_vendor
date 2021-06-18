@@ -18,18 +18,9 @@ sudo ldconfig
 
 ## Check installation
 
-- Install googletest
-
-```bash
-sudo apt-get install -y libgtest-dev
-```
-
 - Compile and run samples
 
 ```bash
-cd ipopt_vendor
-mkdir build && cd build
-cmake ../testing
-make
-./run_tests
+cd ipopt_vendor/testing
+make test
 ```
