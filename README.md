@@ -4,8 +4,8 @@
 [![Docker image](https://github.com/nocoinman/ipopt_vendor/actions/workflows/docker-image.yml/badge.svg)](https://github.com/nocoinman/ipopt_vendor/actions/workflows/docker-image.yml)
 [![Ipopt version](https://img.shields.io/badge/Ipopt%20-v3%2E12-blue.svg)](https://img.shields.io/badge/Ipopt%20-v3%2E12-blue.svg)
 
-Vendor package for working with COIN-OR/Ipopt.
-Provides a minimal debian based container to work with CppAD + Ipopt
+Vendor package for working with COIN-OR/Ipopt, provides a minimal debian based container to work with CppAD + Ipopt
+
 ---
 
 ## Local Ipopt installation
