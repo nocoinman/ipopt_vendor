@@ -15,8 +15,8 @@ jobs:
 
       - name: Install Ipopt
         run: |
-        sudo $GITHUB_WORKSPACE/install.sh
-        sudo ldconfig
+          sudo $GITHUB_WORKSPACE/install.sh
+          sudo ldconfig
 
       - name: Test Installation
         run: |
