@@ -6,4 +6,4 @@ services:
     build: ..
     command: make -C /overlay test
     volumes:
-      - ./testing:/overlay
+      - ../testing:/overlay
