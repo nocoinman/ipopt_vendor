@@ -6,17 +6,23 @@ INSTALL_PREFIX="/usr/local"
 GIT_BRANCH="stable/$TARGET_IPOPT_VERSION"
 CLONE_DIR="$PWD/Ipopt-v$TARGET_IPOPT_VERSION"
 
-sudo apt-get update
-sudo apt-get install -y \
-  build-essential \
-  git \
-  gfortran \
-  patch \
-  wget \
-  pkg-config \
-  cppad
+apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    gfortran \
+    file \
+    make \
+    patch \
+    git \
+    wget \
+    cppad
 
-git clone --recurse-submodules -j4 -b $GIT_BRANCH https://github.com/coin-or/Ipopt.git "$CLONE_DIR"
+git clone \
+  --recurse-submodules -j4 \
+  -b $GIT_BRANCH \
+  https://github.com/coin-or/Ipopt.git \
+  "$CLONE_DIR"
+
 cd "$CLONE_DIR"
 
 echo "[ INFO ] Building Ipopt from ${CLONE_DIR}"
@@ -27,7 +33,7 @@ cd "$CLONE_DIR/ThirdParty/Blas"
 ./get.Blas
 mkdir -p build && cd build
 ../configure --prefix=$INSTALL_PREFIX --disable-shared --with-pic
-sudo make -j4 install
+make -j4 install
 
 # Lapack
 cd "$CLONE_DIR/ThirdParty/Lapack"
@@ -35,7 +41,7 @@ cd "$CLONE_DIR/ThirdParty/Lapack"
 mkdir -p build && cd build
 ../configure --prefix=$INSTALL_PREFIX --disable-shared --with-pic \
   --with-blas="$INSTALL_PREFIX/lib/libcoinblas.a -lgfortran"
-sudo make -j4 install
+make -j4 install
 
 # ASL
 cd "$CLONE_DIR/ThirdParty/ASL"
@@ -45,14 +51,14 @@ cd "$CLONE_DIR/ThirdParty/ASL"
 cd "$CLONE_DIR/ThirdParty/Mumps"
 ./get.Mumps
 
-# build everything
+# Build everything
 cd "$CLONE_DIR"
 ./configure --prefix=$INSTALL_PREFIX coin_skip_warn_cxxflags=yes \
   --with-blas="$INSTALL_PREFIX/lib/libcoinblas.a -lgfortran" \
   --with-lapack=$INSTALL_PREFIX/lib/libcoinlapack.a
 make -j4
 make test
-sudo make -j1 install
+make -j1 install
 
 echo "[ INFO ] Ipopt-v${TARGET_IPOPT_VERSION} installation complete"
 exit 0
