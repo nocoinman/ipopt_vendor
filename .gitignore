@@ -2,3 +2,4 @@ Ipopt-v*
 build
 .idea
 cmake-build-*
+testing/*.out

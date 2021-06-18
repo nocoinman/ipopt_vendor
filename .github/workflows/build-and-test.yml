@@ -1,4 +1,4 @@
-name: Build and Test
+name: Build
 
 on:
   pull_request:
@@ -18,10 +18,8 @@ jobs:
           sudo $GITHUB_WORKSPACE/install.sh
           sudo ldconfig
 
-      - name: Test Installation
+      - name: Test installation
         run: |
-          sudo apt-get install -y libgtest-dev
-          mkdir build && cd build
-          cmake -DCMAKE_BUILD_TYPE=Release $GITHUB_WORKSPACE/testing
+          cd $GITHUB_WORKSPACE/testing
           make -j4
-          ./run_tests
+          make test

@@ -1,5 +1,4 @@
 #include <cppad/ipopt/solve.hpp>
-#include <gtest/gtest.h>
 
 namespace {
     using CppAD::AD;
@@ -22,11 +21,14 @@ namespace {
             fg[1] = x1 * x2 * x3 * x4;
             // g_2 (x)
             fg[2] = x1 * x1 + x2 * x2 + x3 * x3 + x4 * x4;
+            //
+            return;
         }
     };
 }// namespace
 
-TEST(IpoptInstallationTest, hs071) {
+bool get_started(void) {
+    bool ok = true;
     size_t i;
     typedef CPPAD_TESTVECTOR(double) Dvector;
 
@@ -82,8 +84,7 @@ TEST(IpoptInstallationTest, hs071) {
     //
     // Check some of the solution values
     //
-    EXPECT_EQ(solution.status, CppAD::ipopt::solve_result<Dvector>::success);
-
+    ok &= solution.status == CppAD::ipopt::solve_result<Dvector>::success;
     //
     double check_x[] = {1.000000, 4.743000, 3.82115, 1.379408};
     double check_zl[] = {1.087871, 0., 0., 0.};
@@ -91,11 +92,19 @@ TEST(IpoptInstallationTest, hs071) {
     double rel_tol = 1e-6;// relative tolerance
     double abs_tol = 1e-6;// absolute tolerance
     for (i = 0; i < nx; i++) {
-        EXPECT_TRUE(CppAD::NearEqual(
-                check_x[i], solution.x[i], rel_tol, abs_tol));
-        EXPECT_TRUE(CppAD::NearEqual(
-                check_zl[i], solution.zl[i], rel_tol, abs_tol));
-        EXPECT_TRUE(CppAD::NearEqual(
-                check_zu[i], solution.zu[i], rel_tol, abs_tol));
+        ok &= CppAD::NearEqual(
+                check_x[i], solution.x[i], rel_tol, abs_tol);
+        ok &= CppAD::NearEqual(
+                check_zl[i], solution.zl[i], rel_tol, abs_tol);
+        ok &= CppAD::NearEqual(
+                check_zu[i], solution.zu[i], rel_tol, abs_tol);
     }
+
+    return ok;
+}
+
+int main() {
+    if (get_started()) return EXIT_SUCCESS;
+
+    return EXIT_FAILURE;
 }

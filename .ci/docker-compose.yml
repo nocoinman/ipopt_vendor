@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  tests:
+    container_name: ipopt_installation_test
+    build: ..
+    command: make -C /overlay test
+    volumes:
+      - ../testing:/overlay
