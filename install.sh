@@ -4,7 +4,7 @@ TARGET_IPOPT_VERSION="3.12"
 INSTALL_PREFIX="/usr/local/"
 
 GIT_BRANCH="stable/$TARGET_IPOPT_VERSION"
-CLONE_DIR="Ipopt-v$TARGET_IPOPT_VERSION"
+CLONE_DIR="$PWD/Ipopt-v$TARGET_IPOPT_VERSION"
 
 sudo apt-get update
 sudo apt-get install -y \
