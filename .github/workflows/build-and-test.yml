@@ -14,7 +14,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Ipopt
-        run: sudo $GITHUB_WORKSPACE/install.sh
+        run: |
+          sudo $GITHUB_WORKSPACE/install.sh
+          sudo ldconfig
 
       - name: Test Installation
         run: |
